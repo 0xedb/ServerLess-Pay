@@ -25,7 +25,7 @@ module.exports = function (context, reqs) {
     req.end(function(res) {
         if (res.error) throw new Error(res.error);
 
-        console.log(res.body);
+        context.log(res.body);
     });
 
     context.done();
