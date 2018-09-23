@@ -15,6 +15,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "querystring": "^0.2.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "unirest": "^0.5.1"
   }
 }
