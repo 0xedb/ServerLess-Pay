@@ -1,5 +1,12 @@
-const donate = document.querySelector("#donate");
+ 
+const donate = $('#donate');
+const donation = $('#donation');
+const upper = $('.upper'); 
+const img = $('.card-img-top');
+console.log(upper);
 
-donate.addEventListener('click', () => {
-    console.log('you clicked me');
+upper.click(() => {
+  console.log('you clicked me'); 
+   // img.addClass('animated bounceOut'); 
+    upper.style.display = 'none';
 });

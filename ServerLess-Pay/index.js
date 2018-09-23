@@ -20,11 +20,23 @@ let options = {
 
 module.exports = function (context, req) {
     https.write(param);
-    https.request(create_token_url, options);
+    let res = https.request(create_token_url, options);
     https.on('end', () => context.log('Done'));
     https.on('error', (e) => context.log(e));
 
 
     context.done();
+};
+
+
+
+
+
+let param = {
+    "card_number": "4111111111111111",
+    "card_exp_month": "1",
+    "card_exp_year": "2020",
+    "csc": "1234",
+    "card_owner_name": "John Doe"
 };
 
