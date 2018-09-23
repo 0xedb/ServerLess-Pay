@@ -1,4 +1,4 @@
-const $ = require('jquery');
+const request = require('request');
 const create_token_url = "https://paymentspring.com/api/v1/tokens";
 
 let param = {
@@ -10,33 +10,16 @@ let param = {
 };
 
 module.exports = function (context, req) {
-    $.ajax({
+    request({
         url: create_token_url,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Basic " + btoa(process.env.PUBLIC_KEY + ":"));
-        },
-        type: 'POST',
-        data: param,
-        success: function (data) {
-            context.log('Success!');
-        },
-        error: function () {
-            context.log("Error occurred");
-        }
-    });
+        method: 'POST', 
+        json: true, 
+        body: param
+    }, function (error, response, body) {
+        console.log(response);
+        }).auth(process.env.PUBLIC_KEY, '', true);
 
-
-    // context.log('Serverless Code Triggered');
-    // if (req.body && req.body.name) {
-    //     context.res = {
-    //         status: 200,
-    //         body: ""
-    //     };
-    // }
-
-    // const token = function () {
-
-    // };
+   
 
     context.done();
 };
