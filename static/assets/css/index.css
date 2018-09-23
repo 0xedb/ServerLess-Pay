@@ -11,5 +11,9 @@
 
 .content {
 	margin-left: auto;
-	margin-right: auto;
+    margin-right: auto; 
+}
+
+.card-img-top { 
+    padding-top: 20px;
 }
