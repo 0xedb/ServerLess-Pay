@@ -1,3 +1,4 @@
+const btoa = require('btoa');
 const https = require('https');
 const create_token_url = "https://paymentspring.com/api/v1/tokens";
 
