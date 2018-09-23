@@ -1,4 +1,4 @@
-const request = require('request');
+const curl = new (require("curl-request"))();
 const create_token_url = "https://paymentspring.com/api/v1/tokens";
 
 let param = {
@@ -10,16 +10,13 @@ let param = {
 };
 
 module.exports = function (context, req) {
-    request({
-        url: create_token_url,
-        method: 'POST', 
-        json: true, 
-        body: param
-    }, function (error, response, body) {
-        console.log(response);
-        }).auth(process.env.PUBLIC_KEY, '', true);
+    
+    curl.setHeaders(["Authorization: " + "Basic " + btoa(process.env.PUBLIC_KEY + ":")]).setBody(param).post(create_token_url).then(({statusCode, body, headers}) => {
+        context.log(body);
+    }).catch((e) => {
+        context.log(e);
+    });
 
-   
 
     context.done();
 };
