@@ -1,4 +1,5 @@
 var qs = require("querystring");
+var unirest = require("unirest");
 var http = require("http");
 
 module.exports = function (context, req) {
@@ -13,40 +14,27 @@ module.exports = function (context, req) {
         'amount': amount 
     }; 
 
-    // make post request to site
-    var options = {
-      "method": "POST",
-      "hostname": [
-        "serverless-pay",
-        "herokuapp",
-        "com"
-      ],
-      "path": [
-        "api"
-      ],
-      "headers": {
-        "content-type": "multipart/form-data",
-        "Cache-Control": "no-cache"
-      }
-    };
+    // make post request to site   
+
+    var req = unirest("POST", "https://serverless-pay.herokuapp.com/api");
     
-    var reqq = http.request(options, function (res) {
-      var chunks = [];
-    
-      res.on("data", function (chunk) {
-        chunks.push(chunk);
-      });
-    
-      res.on("end", function () {
-        var body = Buffer.concat(chunks);
-        console.log(body.toString());
-      });
+    req.headers({
+      "Postman-Token": "87192f50-49a4-46ac-8646-b95c96889bf2",
+      "Cache-Control": "no-cache",
+      "content-type": "multipart/form-data"
     });
     
-    reqq.write(qs.stringify({ 'amount': amount }));
-    reqq.end();
-
-    context.log(reqq);
-
+    req.multipart([
+      {
+        "body": amount
+      }
+    ]);
+    
+    req.end(function (res) {
+      if (res.error) throw new Error(res.error);
+    
+      context.log(res.body);
+    });
+    
     context.done();
 };
