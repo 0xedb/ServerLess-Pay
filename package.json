@@ -10,7 +10,9 @@
   "author": "Bruno Edoh",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "querystring": "^0.2.0"
   }
 }
