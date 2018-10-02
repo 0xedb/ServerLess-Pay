@@ -18,17 +18,14 @@ module.exports = function (context, req) {
 
     var req = unirest("POST", "https://serverless-pay.herokuapp.com/api");
     
-    req.headers({
-      "Postman-Token": "87192f50-49a4-46ac-8646-b95c96889bf2",
+    req.headers({ 
       "Cache-Control": "no-cache",
-      "content-type": "multipart/form-data"
+      "Content-Type": "application/x-www-form-urlencoded"
     });
     
-    req.multipart([
-      {
-        "body": amount
-      }
-    ]);
+    req.form({
+      "amount": amount
+    });
     
     req.end(function (res) {
       if (res.error) throw new Error(res.error);

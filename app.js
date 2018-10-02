@@ -30,7 +30,8 @@ app.get('/api', function(req, res) {
 app.post('/api', function (req, res) { 
     // perform security checks
     var val = Number(req.body.amount);
-    amount = val; 
+    if(typeof val === 'number')
+        amount = amount + val; 
     console.log(amount, 'post'); 
 });
 
