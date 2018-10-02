@@ -10,37 +10,43 @@ module.exports = function (context, req) {
     let api = "https://serverless-pay.herokuapp.com/api";
     
     context.res = {
-        amount: amount 
+        'amount': amount 
     }; 
 
     // make post request to site
     var options = {
-        "method": "POST",
-        "hostname": [
-          api
-        ], 
-        "headers": {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Cache-Control": "no-cache"
-        }
-      };
-      
-      var reqq = http.request(options, function (res) {
-        var chunks = [];
-      
-        res.on("data", function (chunk) {
-          chunks.push(chunk);
-        });
-      
-        res.on("end", function () {
-          var body = Buffer.concat(chunks);
-          console.log(body.toString());
-        });
+      "method": "POST",
+      "hostname": [
+        "serverless-pay",
+        "herokuapp",
+        "com"
+      ],
+      "path": [
+        "api"
+      ],
+      "headers": {
+        "content-type": "multipart/form-data",
+        "Cache-Control": "no-cache"
+      }
+    };
+    
+    var reqq = http.request(options, function (res) {
+      var chunks = [];
+    
+      res.on("data", function (chunk) {
+        chunks.push(chunk);
       });
-      
-      reqq.write(qs.stringify({ amount: amount }));
-      reqq.end();
+    
+      res.on("end", function () {
+        var body = Buffer.concat(chunks);
+        console.log(body.toString());
+      });
+    });
+    
+    reqq.write(qs.stringify({ 'amount': amount }));
+    reqq.end();
 
+    context.log(reqq);
 
     context.done();
 };
