@@ -48,7 +48,9 @@
                 xhr.onload = function (e) {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
-                            console.log(xhr.responseText);
+                            var val = Number(JSON.parse(xhr.responseText).amount);
+                            console.log(val);
+                            document.getElementById('amount').textContent = Math.round(val);
                         } else {
                             console.error(xhr.statusText);
                         }
