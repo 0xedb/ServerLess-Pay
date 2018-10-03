@@ -1,5 +1,5 @@
 # ServerLess-Pay
 Serverless Payment Processor using [PaymentSpring](https://paymentspring.com/)
 
-
-* npm install
+* clone
+* npm install to run locally
