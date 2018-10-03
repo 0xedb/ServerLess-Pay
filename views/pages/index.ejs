@@ -43,16 +43,21 @@
             crossorigin="anonymous"></script>
         <script>
             window.addEventListener('click', function (e) {
-                var http = new XMLHttpRequest();
-
-                http.onreadystatechage = function () {
-                    if (http.readyState == 4) {
-                        console.log(JSON.parse(http.response));
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "https://serverless-pay.herokuapp.com/api", true);
+                xhr.onload = function (e) {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            console.log(xhr.responseText);
+                        } else {
+                            console.error(xhr.statusText);
+                        }
                     }
-                }
-
-                http.open('GET', 'https://serverless-pay.herokuapp.com/api', true);
-                http.send();
+                };
+                xhr.onerror = function (e) {
+                    console.error(xhr.statusText);
+                };
+                xhr.send(null);
             });
         </script>
     </div>
