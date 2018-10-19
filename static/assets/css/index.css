@@ -5,6 +5,7 @@
 
 .card {
 	margin-top: 10vh;
+	margin-bottom: 10vh;
 	border-radius: 14px;
 	background-color: #e6e6e6e8;
 }
@@ -17,3 +18,4 @@
 .card-img-top { 
     padding-top: 20px;
 }
+
