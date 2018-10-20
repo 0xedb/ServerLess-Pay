@@ -1,7 +1,7 @@
-const http = require("https");
+var request = require("request");
+const private_key = 'test_a350b314c0fa270032754592a2';
 
-
-module.exports = async function (context, req) { 
+module.exports = async function (context, req) {
     const charge = req.body.charge;
     const id = req.body.id;
     context.log(id);
@@ -9,34 +9,24 @@ module.exports = async function (context, req) {
 
     //charge token 
     var options = {
-        "method": "POST",
-        "hostname": 
-            "api.paymentspring.com",
-        "path": [
-            "api",
-            "v1",
-            "charge"
-        ],
+        method: 'POST',
+        url: 'https://api.paymentspring.com/api/v1/charge',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Basic ' + new Buffer("test_0c8a8408be2166a393a393baeb" + ':').toString('base64')
+            'Postman-Token': 'cbb40bbe-61b6-4818-b21c-87ea5a9c24b4',
+            'cache-control': 'no-cache',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + new Buffer(private_key + ':').toString('base64')
+        },
+        form: {
+            token: id,
+            send_receipt: 'false',
+            amount: charge
         }
     };
 
-    var req = http.request(options, function (res) {
-        var chunks = [];
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
 
-        res.on("data", function (chunk) {
-            chunks.push(chunk);
-            context.log(chunk);
-        });
-
-        res.on("end", function () {
-            var body = Buffer.concat(chunks);
-            context.log(body.toString());
-        });
+        console.log(body);
     });
-
-    req.write(JSON.stringify({ token: id, amount: charge, send_receipt: false }));
-    req.end();
 }
