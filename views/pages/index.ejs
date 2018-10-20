@@ -86,22 +86,21 @@
             let token;
 
             function call_response(response) {
-                var settings = {
-                    "async": true,
-                    "crossDomain": true,
-                    "url": "https://serverlesspay.azurewebsites.net/api/charge",
-                    "method": "POST",
-                    "headers": {
-                      "Content-Type": "application/x-www-form-urlencoded",
-                      "cache-control": "no-cache",
-                      "Postman-Token": "af964fb6-43b8-4988-a6f6-4b7902ed2b75"
-                    },
-                    "data": response
-                  }
-                  
-                  $.ajax(settings).done(function (rsp) {
-                    console.log(rsp);
-                  }); 
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+
+                xhr.addEventListener("readystatechange", function () {
+                    if (this.readyState === 4) {
+                        console.log(this.responseText);
+                    }
+                });
+
+                xhr.open("POST", "https://serverlesspay.azurewebsites.net/api/charge");
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.setRequestHeader("cache-control", "no-cache"); 
+
+                xhr.send(response);
+                console.log(response);
                 console.log('Sent');
             }
 
