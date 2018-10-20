@@ -1,13 +1,14 @@
 var request = require("request");
-const private_key = 'test_a350b314c0fa270032754592a2';
+const private_key = 'test_3333bd972446f2ed51fdf02234';
 
-module.exports = async function (context, req) {
+module.exports = function (context, req) {
     const charge = req.body.charge;
     const id = req.body.id;
     context.log(id);
     context.log(charge);
 
     //charge token 
+    context.log('HHHHHHHHHHHHHHHH');
     var options = {
         method: 'POST',
         url: 'https://api.paymentspring.com/api/v1/charge',
@@ -25,8 +26,10 @@ module.exports = async function (context, req) {
     };
 
     request(options, function (error, response, body) {
+        context.log('HHHHHHHHHHHHHHHH');
         if (error) throw new Error(error);
 
-        console.log(body);
+        context.log(body);
+        context.done();
     });
 }
