@@ -31,7 +31,7 @@
                         <div class='donation-form' style='display: none'>
                             <form action="" class="form">
                                 <div class='form-group input-group'>
-                                    <input class="form-control" id="amount" placeholder="amount $" type='text'>
+                                    <input class="form-control" id="amount" placeholder="amount$(format: 180.00)" type='number' step='0.1'>
                                 </div>
 
                                 <div class='form-group input-group'>
@@ -79,7 +79,7 @@
         <script type="text/javascript" src="https://checkout.paymentspring.com/js/paymentspring-tokenizer.js">
         </script>
         <script>
-            const publicKey = "test_be7c16093b47e4785b37f4a46292223380f5ed38afeb416e43e363b0c7";
+            const publicKey = "test_e92e98b99d0b7473be9b919c8481c6350f7be9baf0a61ec35cd9b08d29";
             var donate = document.querySelector("#donate");
             var donation_form = document.querySelector(".donation-form");
             var form = document.querySelector('.form');
@@ -102,12 +102,14 @@
                 let fff = response;
                 var ddd = {
                     'id': fff.id,
-                    'charge': form.amount.value
+                    'charge': form.amount.value,
+                    'email': form.email.value
                 } 
 
                 xhr.send(JSON.stringify(ddd)); 
                 console.log(JSON.stringify(ddd));                
                 console.log('Sent');
+                form.reset();
             }
 
             donate.addEventListener('click', ev => {

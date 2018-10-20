@@ -27,13 +27,13 @@ app.get('/api', function(req, res) {
 });
 
 // handle post request
-app.post('/api', function (req, res) { 
-    // perform security checks
-    var val = Number(req.body.amount);
-    if(typeof val === 'number')
-        amount = amount + val; 
-    console.log(amount, 'post'); 
-});
+// app.post('/api', function (req, res) { 
+//     // perform security checks
+//     var val = Number(req.body.amount);
+//     if(typeof val === 'number')
+//         amount = amount + val; 
+//     console.log(amount, 'post'); 
+// });
 
 
 app.get('*', function (req, res) {
