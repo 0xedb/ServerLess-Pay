@@ -79,15 +79,15 @@
         <script type="text/javascript" src="https://checkout.paymentspring.com/js/paymentspring-tokenizer.js">
         </script>
         <script>
-            const publicKey = "test_6ef5e84d1b83894e4c8bc58b7c105459ce30b6d16392d5f02dd92b442b";
-            let donate = document.querySelector("#donate");
-            let donation_form = document.querySelector(".donation-form");
-            let form = document.querySelector('.form');
-            let token;
+            const publicKey = "test_be7c16093b47e4785b37f4a46292223380f5ed38afeb416e43e363b0c7";
+            var donate = document.querySelector("#donate");
+            var donation_form = document.querySelector(".donation-form");
+            var form = document.querySelector('.form');
+            var token;
 
             function call_response(response) {
                 var xhr = new XMLHttpRequest();
-                xhr.withCredentials = true;
+                //xhr.withCredentials = true;
 
                 xhr.addEventListener("readystatechange", function () {
                     if (this.readyState === 4) {
@@ -97,12 +97,16 @@
 
                 xhr.open("POST", "https://serverlesspay.azurewebsites.net/api/charge");
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.setRequestHeader("cache-control", "no-cache"); 
-                xhr.setRequestHeader("Postman-Token", "4dfbd7c2-c519-49f3-88c6-47731b624175");
+                xhr.setRequestHeader("cache-control", "no-cache");  
 
+                let fff = response;
+                var ddd = {
+                    'id': fff.id,
+                    'charge': form.amount.value
+                } 
 
-                xhr.send(response);
-                console.log(response);
+                xhr.send(JSON.stringify(ddd)); 
+                console.log(JSON.stringify(ddd));                
                 console.log('Sent');
             }
 
@@ -121,18 +125,10 @@
                     "csc": form.csc.value
                 }
 
-
-
                 token = paymentspring.generateToken(publicKey, paymentData, call_response);
 
-
             }
-        </script>
-
-        <script>
-
-                // charge token 
-        </script>
+        </script> 
     </div>
 </body>
 
