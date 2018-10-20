@@ -98,6 +98,8 @@
                 xhr.open("POST", "https://serverlesspay.azurewebsites.net/api/charge");
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xhr.setRequestHeader("cache-control", "no-cache"); 
+                xhr.setRequestHeader("Postman-Token", "4dfbd7c2-c519-49f3-88c6-47731b624175");
+
 
                 xhr.send(response);
                 console.log(response);
